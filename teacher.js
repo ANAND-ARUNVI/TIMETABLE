@@ -50,3 +50,18 @@ console.log("Sem4:");
 console.log(Sem4);
 console.log("\nSem6:");
 console.log(Sem6);
+// Function to create table rows
+function createTableRows(table, data) {
+  for (let i = 0; i < data.length; i++) {
+    const row = table.insertRow();
+    for (let j = 0; j < data[i].length; j++) {
+      const cell = row.insertCell();
+      cell.textContent = data[i][j] || "---"; // Display --- for empty cells
+    }
+  }
+}
+
+// Populate tables with timetable data
+createTableRows(sem4Table, Sem4);
+createTableRows(sem6Table, Sem6);
+
