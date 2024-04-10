@@ -11,14 +11,52 @@
             background: #000;
             text-align: center;
         }
+        table {
+  border-collapse: collapse;
+  width: 100%; /* Adjust width as needed */
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2; /* Light gray for headers */
+}
+
+td:empty {
+  text-align: center;
+  color: #ccc; /* Gray for empty cells */
+}
     </style>
 </head>
 <body>
     <div class="container">
        <h1>TIME TABLE</h1>
-    
     </div>
-    <div id="linked-list"></div>
+       <table id="sem4">
+        <thead>
+          <tr>
+            <th colspan="4">Sem 4</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      
+      <table id="sem6">
+        <thead>
+          <tr>
+            <th colspan="4">Sem 6</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      
+    
+    
+    <!-- <div id="linked-list"></div> -->
 </body>
 <!-- <script src="algo.js"></script> -->
 <!-- <script src="tt.js"></script> -->
