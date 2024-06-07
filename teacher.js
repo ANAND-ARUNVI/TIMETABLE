@@ -1,40 +1,51 @@
-const teacherMap = new Map();
-teacherMap.set("Dr. Jyoti Mahajan", 1);
+const teacherMap = new Map(); //creating hash map obj
+teacherMap.set("Dr. Jyoti Mahajan", 1); // populating it 
 teacherMap.set("Dr Bhawna Sharma", 2);
 teacherMap.set("Dr Simmi Dutta", 3);
 teacherMap.set("Mr Bilal Ahmed", 4);
 teacherMap.set("Mr Prabjot Singh", 5);
 teacherMap.set("Mr Akhil Sir", 6);
 teacherMap.set("Dr Sheetal Gandotra", 7);
-teacherMap.set("Mr Ankita Sharma", 8);
+teacherMap.set("Ms Ankita Sharma", 8);
+teacherMap.set("Remedial Class", 9);
+teacherMap.set("Library", 10);
+teacherMap.set("Lab 1", 11);
+teacherMap.set("Lab 2", 12);
 
-const Sem4 = Array(5).fill(null).map(() => Array(5).fill(null));
-const Sem6 = Array(5).fill(null).map(() => Array(5).fill(null));
 
+// creating two 5*4 array where each element is initialized with null
+const Sem4 = Array(5).fill(null).map(() => Array(6).fill(null));
+const Sem6 = Array(5).fill(null).map(() => Array(6).fill(null));
+
+//Fisher Yates shuffle algorithm
 function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
+  for (let i = array.length - 1; i > 0; i--) { //row iterate and in each row elements are shuffled..
     const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+    [array[i], array[j]] = [array[j], array[i]];// swapping here indices
   }
   return array;
 }
 
-const teacherNames = Array.from(teacherMap.keys());
-const shuffledTeacherNames = shuffleArray(teacherNames.slice());
-
+const teacherNames = Array.from(teacherMap.keys()); // teacher name (key) and then converted to array
+const shuffledTeacherNames = shuffleArray(teacherNames.slice()); // makes shallow copy of array no change in array, array inisde array will be changed
+const breakColumn = 4; // Index of the column to display break
 let index = 0;
+// from 
 for (let i = 0; i < 5; i++) {
-  for (let j = 0; j < 5; j++) {
+  for (let j = 0; j < 4; j++) {
     Sem4[i][j] = shuffledTeacherNames[index % shuffledTeacherNames.length]; // Fill every cell
+    // so already shuffle vale mei se ek pick kr rhe hai
     index++;
   }
+ 
 }
 
 shuffleArray(shuffledTeacherNames);
+// for fresh staet
 
 index = 0;
 for (let i = 0; i < 5; i++) {
-  for (let j = 0; j < 5; j++) {
+  for (let j = 0; j < 4; j++) {
     let assignedTeacher = shuffledTeacherNames[index % shuffledTeacherNames.length];
     while (Sem4[i][j] === assignedTeacher) { // Check for clash
       index = (index + 1) % shuffledTeacherNames.length; // Get a different teacher
@@ -48,15 +59,34 @@ for (let i = 0; i < 5; i++) {
 
 console.log("Sem4:");
 console.log(Sem4);
+// document.write(Sem4);
 console.log("\nSem6:");
 console.log(Sem6);
-// Function to create table rows
+const sem4Table = document.getElementById("sem4");
+const sem6Table = document.getElementById("sem6");
+
+const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+const teacherColumns = 5; // Number of columns for teacher assignments
+
+// const timeSlots = ["9:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-1:00", "1:00-3:00", "3:00-5:00"]; // Example time slots
+
 function createTableRows(table, data) {
   for (let i = 0; i < data.length; i++) {
     const row = table.insertRow();
+
+    // Insert cell for the day of the week
+    const dayCell = row.insertCell();
+    dayCell.textContent = daysOfWeek[i];
+
+    // Insert cells for teacher assignments and/or lunch break
     for (let j = 0; j < data[i].length; j++) {
       const cell = row.insertCell();
-      cell.textContent = data[i][j] || "---"; // Display --- for empty cells
+      if (j === breakColumn) {
+        cell.textContent = "Break";
+      } 
+      else if (j < breakColumn || j >= breakColumn + 1) { // Check before and after break column
+        cell.textContent = data[i][j - (j > breakColumn ? 1 : 0)] || "--"; // Adjust index for break
+      }
     }
   }
 }
@@ -64,4 +94,3 @@ function createTableRows(table, data) {
 // Populate tables with timetable data
 createTableRows(sem4Table, Sem4);
 createTableRows(sem6Table, Sem6);
-
