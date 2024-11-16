@@ -1,12 +1,12 @@
 const teacherMap = new Map(); //creating hash map obj
-teacherMap.set("Dr. Jyoti Mahajan", 1); // populating it 
-teacherMap.set("Dr Bhawna Sharma", 2);
-teacherMap.set("Dr Simmi Dutta", 3);
-teacherMap.set("Mr Bilal Ahmed", 4);
-teacherMap.set("Mr Prabjot Singh", 5);
-teacherMap.set("Mr Akhil Sir", 6);
-teacherMap.set("Dr Sheetal Gandotra", 7);
-teacherMap.set("Ms Ankita Sharma", 8);
+teacherMap.set("Mr Mahajan", 1); // populating it 
+teacherMap.set("Mr Sharma", 2);
+teacherMap.set("Ms Dutta", 3);
+teacherMap.set("Mr Ahmed", 4);
+teacherMap.set("Mr Singh", 5);
+teacherMap.set("Ms Bhan", 6);
+teacherMap.set("Ms Gandotra", 7);
+teacherMap.set("Ms Sharma", 8);
 teacherMap.set("Remedial Class", 9);
 teacherMap.set("Library", 10);
 teacherMap.set("Lab 1", 11);
